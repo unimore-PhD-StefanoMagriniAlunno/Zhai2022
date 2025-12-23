@@ -53,7 +53,7 @@ Implementation of Zhai Dobson Li (2022) paper.
 
   Scientific calculus suite:
   ```bash
-  pdm add scipy sympy scikit-learn statsmodels
+  pdm add scipy scikit-learn statsmodels
   ```
 
   GPU boost suite:

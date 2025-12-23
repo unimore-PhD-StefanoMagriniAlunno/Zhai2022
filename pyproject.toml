@@ -5,7 +5,7 @@ description = "Default template for PDM package"
 authors = [
     {name = "unimore-PhD-StefanoMagriniAlunno", email = "376971@studenti.unimore.it"},
 ]
-dependencies = ["pre-commit>=4.5.1", "black>=25.12.0", "mypy>=1.19.1", "pytest>=9.0.2"]
+dependencies = ["pre-commit>=4.5.1", "black>=25.12.0", "mypy>=1.19.1", "pytest>=9.0.2", "jupyter>=1.1.1", "ipykernel>=7.1.0", "notebook>=7.5.1", "jupyterlab>=4.5.1", "nbconvert>=7.16.6", "pandas>=2.3.3", "numpy>=2.2.6", "matplotlib>=3.10.8", "seaborn>=0.13.2", "plotly>=6.5.0", "scipy>=1.15.3", "sympy>=1.14.0", "scikit-learn>=1.7.2", "statsmodels>=0.14.6", "torch>=2.9.1", "tensorflow>=2.20.0"]
 requires-python = "==3.10.*"
 readme = "README.md"
 license = {text = "MIT"}
