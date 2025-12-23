@@ -1,5 +1,5 @@
-# Python Template
-Repository template for python projects
+# Zhai Dobson Li 2022
+Implementation of Zhai Dobson Li (2022) paper.
 
 ## Get start
 ### Requirements
@@ -35,12 +35,12 @@ Repository template for python projects
 
 ### Data Science suite
   This is a list of packages for data science studies.
-  
+
   Notebook suite:
   ```bash
   pdm add jupyter ipykernel notebook jupyterlab nbconvert
   ```
-  
+
   Data management suite:
   ```bash
   pdm add pandas numpy
@@ -50,7 +50,7 @@ Repository template for python projects
   ```bash
   pdm add matplotlib seaborn plotly
   ```
-  
+
   Scientific calculus suite:
   ```bash
   pdm add scipy sympy scikit-learn statsmodels

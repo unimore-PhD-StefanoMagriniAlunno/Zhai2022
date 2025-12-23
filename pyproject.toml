@@ -1,0 +1,15 @@
+[project]
+name = "Zhai2022"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "unimore-PhD-StefanoMagriniAlunno", email = "376971@studenti.unimore.it"},
+]
+dependencies = ["pre-commit>=4.5.1", "black>=25.12.0", "mypy>=1.19.1", "pytest>=9.0.2"]
+requires-python = "==3.10.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
