@@ -50,7 +50,9 @@ def euler_maruyama(
     X[0] = X0
     sqrt_dt: float = np.sqrt(dt)
     for k in range(1, steps + 1):
-        dW = np.random.normal(0.0, sqrt_dt, size=(n_samples, n_dim))
+        dW = np.asarray(np.random.normal(0.0, sqrt_dt, size=(n_samples, n_dim))).astype(
+            X0.dtype
+        )
         X[k] = X[k - 1] + drift(X[k - 1], k * dt) + diffusion(X[k - 1], k * dt) * dW
 
     return X
