@@ -12,8 +12,6 @@ Affiliations:
 - Department of Mathematics, University of Modena and Reggio-Emilia (UNIMORE)
 - ADAMUS project (PhD scholarship funding)
 
-## Acknowledgements
-
 This research has been carried out within the ADAMUS project at the University of Modena and Reggio-Emilia under the supervision of prof. Lorenzo Pareschi.
 
 ## License
