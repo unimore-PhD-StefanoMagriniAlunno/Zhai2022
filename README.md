@@ -25,7 +25,14 @@ Check pdm installation:
 ```
 pdm --version
 ```
+
 Install packages:
 ```
-pdm init
+pdm install
 ```
+
+Make the documentation
+```
+pdm run make html
+```
+you can find the documentation in build/html/index.html
