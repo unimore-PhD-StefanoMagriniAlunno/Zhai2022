@@ -2,59 +2,53 @@ import pytest
 
 __all__ = ["pytest"]
 
-import zhai2022.euler_maruyama as em
+from zhai2022.sde import Model
 
 
-def test_em_trajectory():
+def test_sde():
     import numpy as np
-    from zhai2022.euler_maruyama import trajectory
 
-    # model settings
-    n_dim = 2
-
+    # Define drift, diffusion, and initial state functions
     def drift(X, t):
-        return X
+        return -X
 
     def diffusion(X, t):
-        return np.eye(n_dim)
+        return np.tile(np.eye(X.shape[1]), (X.shape[0], 1, 1))
 
-    initial_state = np.zeros(2)
+    def initial_state(n_samples):
+        return np.random.randn(n_samples, 2)
 
-    # scheme settings
-    n_agents = 5000
-    n_steps = 1000
-    dt = 0.01
-    X0 = np.tile(initial_state, (n_agents, 1))
+    # Create a Model instance
+    model = Model(drift, diffusion, initial_state, initial_time=0.0, n_dim=2)
 
-    X = trajectory(X0, n_steps, dt, drift, diffusion)
-
-    assert X.shape == (n_steps + 1, n_agents, n_dim)
-    assert X.dtype == X0.dtype
+    assert model.n_dim == 2
+    assert model.initial_time == 0.0
+    assert model.sample_initial_state(5).shape == (5, 2)
 
 
-def test_em_cuda_trajectory():
-    import torch
-    from zhai2022.euler_maruyama.cuda import trajectory
+from zhai2022.sde.euler_maruyama import EulerMaruyama
 
-    # model settings
-    n_dim = 2
+
+def test_euler_maruyama():
+    import numpy as np
 
     def drift(X, t):
-        return X
+        return -X
 
     def diffusion(X, t):
-        return torch.eye(n_dim)
+        return np.tile(np.eye(X.shape[1]), (X.shape[0], 1, 1))
 
-    initial_state = torch.zeros(2)
+    def initial_state(n_samples):
+        return np.random.randn(n_samples, 2)
 
-    # scheme settings
-    n_agents = 5000
-    n_steps = 1000
-    dt = 0.01
-    X0 = torch.tile(initial_state, (n_agents, 1))
+    model = Model(drift, diffusion, initial_state, initial_time=0.0, n_dim=2)
 
-    X = trajectory(X0, n_steps, dt, drift, diffusion)
+    dt_schedule = np.ones(100) / np.arange(1, 101) * 0.1
+    euler_maruyama = EulerMaruyama(model, dt_schedule)
+    assert euler_maruyama.n_steps == 100
 
-    assert X.shape == (n_steps + 1, n_agents, n_dim)
-    assert X.dtype == X0.dtype
-    assert X.device == X0.device
+    X = euler_maruyama.get_trajectory(n_samples=200)
+    assert X.shape == (1 + len(dt_schedule), 200, model.n_dim)
+
+    X = euler_maruyama.get_end(n_samples=150)
+    assert X.shape == (150, model.n_dim)

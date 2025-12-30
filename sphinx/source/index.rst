@@ -21,4 +21,4 @@ This project involves ...
    :caption: Contents:
 
    bibliography
-   rst_files/euler_maruyama
+   rst_files/sde

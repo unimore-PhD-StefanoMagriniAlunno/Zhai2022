@@ -1,5 +1,5 @@
-Monte Carlo Documentation
-=========================
+Euler-Maruyama Method Documentation
+===================================
 
 This module implements the Euler-Maruyama method for simulating stochastic differential equations (SDEs):
 
@@ -11,22 +11,6 @@ where:
 - :math:`\mu` is the drift coefficient, a function :math:`\mu: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n`
 - :math:`\sigma` is the diffusion coefficient, a function :math:`\sigma: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n`
 - :math:`W_t` is a Wiener process (or Brownian motion) in :math:`\mathbb{R}^n`.
-
-In :cite:p:`SDE_existence_uniqueness` the author proved that these conditions ensure the existence and uniqueness of solutions:
-
-- :math:`\mu` and :math:`\sigma` should be measurable functions.
-- They should satisfy the Lipschitz condition: there exists a constant :math:`L > 0` such that for all :math:`x, y \in \mathbb{R}^n` and :math:`t \in \mathbb{R}^+`, :math:`\|\mu(x, t) - \mu(y, t)\| + \|\sigma(x, t) - \sigma(y, t)\| \leq L \|x - y\|`.
-- They should also satisfy the linear growth condition: there exists a constant :math:`K > 0` such that for all :math:`x \in \mathbb{R}^n` and :math:`t \in \mathbb{R}^+`, :math:`\|\mu(x, t)\|^2 + \|\sigma(x, t)\|^2 \leq K(1 + \|x\|^2)`.
-
-In summary, these conditions ensure that the SDE has a unique solution, which is essential for the stability and reliability of numerical methods like the Euler-Maruyama method.
-
-A Monte Carlo method is employed to simulate multiple trajectories of the SDE, allowing for statistical analysis of the system's behavior over time.
-In particular, given an initial condition :math:`X_0` (a random variable), we generate :math:`M` independent initial states :math:`\left\{Y_0^{(i)}\right\}_{i=1}^M` according to the distribution of :math:`X_0`.
-For each initial state, we simulate the trajectories :math:`\left\{Y_t^{(i)}\right\}_{t\in(0,T)}` using some scheme.
-The idea is to approximate the distribution of :math:`X_t` by the empirical distribution of the samples :math:`\left\{Y_t^{(i)}\right\}_{i=1}^M` at each time point :math:`t`.
-
-Euler-Maruyama Method
------------------------
 
 The Euler-Maruyama method is a numerical technique used to approximate solutions to stochastic differential equations.
 It is an extension of the Euler method for ordinary differential equations, incorporating stochastic components.
@@ -41,7 +25,7 @@ where :math:`\Delta W_t` is a normally distributed random variable with mean :ma
 The method also requires the initial condition :math:`X_0`, which is typically sampled from a specified distribution.
 
 Error Analysis
-~~~~~~~~~~~~~~
+--------------
 
 The strong error of the Euler-Maruyama method is defined as the expected value of the absolute difference between the true solution :math:`X_T` and the numerical approximation :math:`X_T^{\Delta t}` at time :math:`T`:
 
@@ -64,8 +48,10 @@ A consequence of this is that the Euler-Maruyama method is particularly effectiv
 Implementations
 ~~~~~~~~~~~~~~~~~
 
-.. autofunction:: zhai2022.euler_maruyama.trajectory
-    :no-index:
-
-.. autofunction:: zhai2022.euler_maruyama.cuda.trajectory
+.. automodule:: zhai2022.sde.euler_maruyama
+    :show-inheritance:
+    :inherited-members:
+    :members:
+    :private-members:
+    :special-members: __init__
     :no-index:
