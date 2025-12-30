@@ -31,6 +31,7 @@ pdm install
 
 Make the documentation
 ```
+pdm run pre-commit install
 pdm run pre-commit run sphinx
 ```
 you can find the documentation in build/html/index.html

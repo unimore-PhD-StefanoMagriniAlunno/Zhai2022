@@ -6,14 +6,20 @@ repos:
     rev: v3.2.0
     hooks:
       - id: trailing-whitespace
+        files: ^(src|tests)/.*\.py$
       - id: end-of-file-fixer
+        files: ^(src|tests)/.*\.py$
       - id: check-yaml
+        files: ^(src|tests)/.*\.py$
       - id: check-json
+        files: ^(src|tests)/.*\.py$
       - id: check-added-large-files
+        files: ^(src|tests)/.*\.py$
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.2.1
     hooks:
       - id: autoflake
+        files: ^(src|tests)/.*\.py$
         name: autoflake
         entry: autoflake
         language: python
@@ -27,6 +33,7 @@ repos:
   - repo: local
     hooks:
       - id: black
+        files: ^(src|tests)/.*\.py$
         name: black
         language: system
         entry: pdm run black .
@@ -34,6 +41,7 @@ repos:
         always_run: true
 
       - id: mypy
+        files: ^(src|tests)/.*\.py$
         name: mypy
         language: system
         entry: pdm run mypy .
@@ -45,6 +53,7 @@ repos:
         always_run: true
 
       - id: pytest
+        files: ^(src|tests)/.*\.py$
         name: tests
         entry: pdm run pytest --maxfail=1
         language: system
@@ -52,8 +61,9 @@ repos:
         always_run: true
 
       - id: sphinx
+        files: ^(src|tests)/.*\.py$
         name: documentation
-        entry: pdm run sphinx-build -b html -a docs/sphinx/source docs/sphinx/build
+        entry: pdm run sphinx-build -b html -a sphinx/source docs/sphinx
         language: system
         pass_filenames: false
         always_run: true

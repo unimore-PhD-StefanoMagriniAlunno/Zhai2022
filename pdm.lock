@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:b427560a7029b4040cd47691c445c188069fbe1a1990205810b443127d288cef"
+content_hash = "sha256:3b93a4320a1cf28d0e25685a98792507a3a7dd6fce06c647cb7db43cafde6b00"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -4198,6 +4198,28 @@ files = [
     {file = "triton-3.3.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9999e83aba21e1a78c1f36f21bce621b77bcaa530277a50484a7cb4a822f6e43"},
     {file = "triton-3.3.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b89d846b5a4198317fec27a5d3a609ea96b6d557ff44b56c23176546023c4240"},
     {file = "triton-3.3.1-cp313-cp313t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a3198adb9d78b77818a5388bff89fa72ff36f9da0bc689db2f0a651a67ce6a42"},
+]
+
+[[package]]
+name = "types-decorator"
+version = "5.2.0.20251101"
+requires_python = ">=3.9"
+summary = "Typing stubs for decorator"
+groups = ["default"]
+files = [
+    {file = "types_decorator-5.2.0.20251101-py3-none-any.whl", hash = "sha256:8176470ec0a2190e9d688577d4987b24039ae4a23913211707eda96bf2755b0c"},
+    {file = "types_decorator-5.2.0.20251101.tar.gz", hash = "sha256:120e2bf4792ec8a47653db1cb380c7aacb6862a797c1490a910aacc21548286c"},
+]
+
+[[package]]
+name = "types-tabulate"
+version = "0.9.0.20241207"
+requires_python = ">=3.8"
+summary = "Typing stubs for tabulate"
+groups = ["default"]
+files = [
+    {file = "types_tabulate-0.9.0.20241207-py3-none-any.whl", hash = "sha256:b8dad1343c2a8ba5861c5441370c3e35908edd234ff036d4298708a1d4cf8a85"},
+    {file = "types_tabulate-0.9.0.20241207.tar.gz", hash = "sha256:ac1ac174750c0a385dfd248edc6279fa328aaf4ea317915ab879a2ec47833230"},
 ]
 
 [[package]]
