@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    
+    <meta name="docsearch:name" content="Zhai2022" />
+    <meta name="docsearch:package_type" content="" />
+    <meta name="docsearch:release" content="0.1.0" />
+    <meta name="docsearch:version" content="" />
+    
+      <meta name="theme-color" content="#0DCAF0" />
+    
+    
+      <title>Monte Carlo Documentation &mdash; Zhai2022 0.1.0 documentation</title>
+    
+    <link rel="canonical" href="rst_files/euler_maruyama" />
+          <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/sphinx-nefertiti-default.min.css?v=5597b8b1" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/fonts/nunito/stylesheet.css?v=abf98f06" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/fonts/ubuntu-sans-mono/stylesheet.css?v=8616a587" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/pygments-dark.css?v=2de69186" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/pygments-light.css?v=970f37b1" /><!-- add (1) -->
+          <link rel="stylesheet" type="text/css" href="../_static/bootstrap-icons.min.css?v=44730005" /><!-- add (1) -->
+        <link rel="index" title="Index" href="../genindex.html" />
+        <link rel="search" title="Search" href="../search.html" />
+        <link rel="top" title="Zhai2022 0.1.0 documentation" href="#" />
+        <link rel="prev" title="Bibliography" href="../bibliography.html" />
+    <style>
+      :root {
+        --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
+        --nftt-font-monospace: "Ubuntu Sans Mono", var(--nftt-font-family-monospace) !important;
+        --nftt-project-name-font: var(--nftt-body-font-family);
+        --nftt-documentation-font: var(--nftt-body-font-family);
+        --nftt-doc-headers-font: "Georgia", var(--nftt-documentation-font);}
+
+      h1 *,
+      h2 *,
+      h3 *,
+      h4 *,
+      h5 *,
+      h6 * {
+        font-size: inherit;
+      }
+
+      .light pre,
+      .dark pre {
+        line-height: var(--nftt-pre-line-height, 140%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="back-to-top-container" class="position-fixed start-50 translate-middle-x">
+      <button id="back-to-top" type="button" class="d-none btn btn-neutral btn-sm shadow px-4" data-bs-toggle="button">Back to top</button>
+    </div>
+    <header id="snftt-nav-bar" class="navbar navbar-expand-xl navbar-dark nftt-navbar flex-column fixed-top">
+      <div class="skip-links container-fluid visually-hidden-focusable overflow-hidden justify-content-start flex-grow-1">
+        <div class="border-bottom mb-2 pb-2 w-100">
+          <a class="d-none d-md-inline-flex p-2 m-1" href="#sidebar-filter">Skip to index filter</a>
+          <a class="d-inline-flex p-2 m-1" href="#content">Skip to main content</a>
+        </div>
+      </div>
+      <nav class="container-xxl nftt-gutter flex-nowrap" aria-label="Main navigation">
+        <div class="nftt-navbar-toggler">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Toggle documentation navigation">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+          <a href="../index.html"
+             class="navbar-brand"
+          ><span class="brand-text">Zhai2022</span><span class="brand-short-text">Zhai2022</span></a>
+        
+        
+        <div class="d-flex d-xl-none">
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttSearch" aria-controls="nfttSearch" aria-label="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#nfttNavbar" aria-controls="nfttNavbar" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+        </div>
+        
+<div class="offcanvas-xl offcanvas-end flex-grow-1" tabindex="-1" id="nfttSearch" aria-labelledby="nfttSearchOffcanvasLabel" data-bs-scroll="true">
+  <div class="offcanvas-header px-4 pb-0">
+    <h5 class="offcanvas-title fw-bold" id="nfttSearchOffcanvasLabel">Search the documentation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttSearch"></button>
+  </div>
+  <div class="offcanvas-body p-4 pt-0 p-xl-0 ps-xl-4">
+    <hr class="d-xl-none text-white-50">
+    <ul class="navbar-nav flex-row align-items-center flex-wrap ms-md-auto">
+      <li class="nav-item col-12 col-xl-auto">
+        <form id="nftt-search-form" action="../search.html" method="get">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control search-input" placeholder="Search" aria-label="Search" aria-describedby="button-search">
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+            <button class="btn btn-primary" type="submit" id="button-search" aria-label="Search"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
+
+        <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="nfttNavbar" aria-labelledby="nfttNavbarOffcanvasLabel" data-bs-scroll="true">
+          <div class="offcanvas-header px-4 pb-0">
+            <div class="offcanvas-title navbar-brand" id="nfttNavbarOffcanvasLabel"><span class="brand-short-text">Zhai2022</span></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#nfttNavbar"></button>
+          </div>
+          <div class="offcanvas-body p-4 pt-0 p-xl-0 px-xl-3">
+            <hr class="d-xl-none text-white-50">
+            <ul class="navbar-nav flex-row align-items-center flex-wrap ms-lg-auto">
+              
+              
+              
+              
+              
+              <!-- lightdark-dropdown.html -->
+<li class="nav-item dropdown">
+  <a class="nav-link d-flex py-2 px-0 px-xl-2 dropdown-toggle align-items-center" id="snftt-luz" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" aria-label="Change appearance">
+    <i class="bi bi-circle-half" data-snftt-luz-icon-active></i>
+    <span id="snftt-luz-text" class="d-xl-none ms-2">Change appearance</span>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="snftt-luz-text">
+    <li>
+      <h6 class="dropdown-header">Change appearance</h6>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="light" href="#" aria-pressed="false">
+        <span>
+          <i class="bi bi-sun" data-snftt-luz-icon="light"></i>
+        </span>
+        <span class="ms-3">Light</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center" data-snftt-luz="dark" href="#" aria-pressed="false">
+        <span>
+          <i class="bi bi-moon-stars" data-snftt-luz-icon="dark"></i>
+        </span>
+        <span class="ms-3">Dark</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item current d-flex align-items-center" data-snftt-luz="default" href="#" aria-pressed="false">
+        <span>
+          <i class="bi bi-circle-half" data-snftt-luz-icon="default"></i>
+        </span>
+        <span class="ms-3">Automatic</span>
+        <i class="bi bi-check ms-auto"></i>
+      </a>
+    </li>
+  </ul>
+</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+
+    <div class="container-fluid flex-grow-1">
+      <div class="nftt-gutter nftt-page">
+        <aside class="nftt-sidebar ">
+          <div class="nftt-sidebar-content">
+            
+            <div class="title d-none d-xl-none">
+              <i class="bi bi-book"></i>&nbsp;&nbsp;<span>Index</span>
+            </div>
+            <div id="sidebar" tabindex="-1" class="offcanvas-xl offcanvas-start" aria-labelledby="nfttSidebarOffcanvasLabel">
+                <!-- sidebartemplate: "globaltoc.html" --><div class="offcanvas-header border-bottom">
+  <h5 class="offcanvas-title fw-bold" id="nfttSidebarOffcanvasLabel">
+    Index
+  </h5>
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#sidebar"></button>
+</div>
+
+<div class="offcanvas-body">
+  <nav class="toc" aria-label="Main menu">
+    <div class="mb-3 p-1 pb-4 border-bottom">
+      <input id="sidebar-filter" type="text" name="filter" class="form-control form-control-sm" placeholder="index filter" aria-label="index filter">
+    </div>
+    <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Monte Carlo Documentation</a></li>
+</ul>
+
+  </nav>
+  <template data-toggle-item-template>
+    <button class="btn btn-sm btn-link toctree-expand" type="button">
+      <i class="bi bi-caret-right"></i>
+      <span class="visually-hidden">Toggle menu contents</span>
+    </button>
+  </template>
+</div>
+            </div>
+            
+          </div>
+        </aside>
+        <article id="content" class="nftt-content" role="main">
+          <div><div class="d-flex flex-row justify-content-between">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="../index.html">Start</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Monte Carlo Documentation</li>
+    </ol>
+  </nav>
+  
+    <div class="fs085">
+        <a href="../_sources/rst_files/euler_maruyama.rst.txt"  rel="nofollow" aria-label="Show source of this document"><i class="bi bi-file-earmark-code"></i></a>
+    </div>
+  
+</div>
+            
+    <section id="monte-carlo-documentation">
+<h1>Monte Carlo Documentation<a class="headerlink" href="#monte-carlo-documentation" title="Link to this heading">¶</a></h1>
+<p>This module implements the Euler-Maruyama method for simulating stochastic differential equations (SDEs):</p>
+<p><span class="math notranslate nohighlight">\(dX_t = \mu(X_t, t) dt + \sigma(X_t, t) dW_t\)</span></p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_t\)</span> is the state variable at time <span class="math notranslate nohighlight">\(t\)</span>, it is a stochastic process in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the drift coefficient, a function <span class="math notranslate nohighlight">\(\mu: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the diffusion coefficient, a function <span class="math notranslate nohighlight">\(\sigma: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(W_t\)</span> is a Wiener process (or Brownian motion) in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p></li>
+</ul>
+<p>In <span id="id1">[<a class="reference internal" href="../bibliography.html#id2" title="Bernt Oksendal. Stochastic Differential Equations: An Introduction with Applications. Springer, 2003.">1</a>]</span> the author proved that these conditions ensure the existence and uniqueness of solutions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> should be measurable functions.</p></li>
+<li><p>They should satisfy the Lipschitz condition: there exists a constant <span class="math notranslate nohighlight">\(L &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}^+\)</span>, <span class="math notranslate nohighlight">\(\|\mu(x, t) - \mu(y, t)\| + \|\sigma(x, t) - \sigma(y, t)\| \leq L \|x - y\|\)</span>.</p></li>
+<li><p>They should also satisfy the linear growth condition: there exists a constant <span class="math notranslate nohighlight">\(K &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}^+\)</span>, <span class="math notranslate nohighlight">\(\|\mu(x, t)\|^2 + \|\sigma(x, t)\|^2 \leq K(1 + \|x\|^2)\)</span>.</p></li>
+</ul>
+<p>In summary, these conditions ensure that the SDE has a unique solution, which is essential for the stability and reliability of numerical methods like the Euler-Maruyama method.</p>
+<p>A Monte Carlo method is employed to simulate multiple trajectories of the SDE, allowing for statistical analysis of the system’s behavior over time.
+In particular, given an initial condition <span class="math notranslate nohighlight">\(X_0\)</span> (a random variable), we generate <span class="math notranslate nohighlight">\(M\)</span> independent initial states <span class="math notranslate nohighlight">\(\left\{Y_0^{(i)}\right\}_{i=1}^M\)</span> according to the distribution of <span class="math notranslate nohighlight">\(X_0\)</span>.
+For each initial state, we simulate the trajectories <span class="math notranslate nohighlight">\(\left\{Y_t^{(i)}\right\}_{t\in(0,T)}\)</span> using some scheme.
+The idea is to approximate the distribution of <span class="math notranslate nohighlight">\(X_t\)</span> by the empirical distribution of the samples <span class="math notranslate nohighlight">\(\left\{Y_t^{(i)}\right\}_{i=1}^M\)</span> at each time point <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<section id="euler-maruyama-method">
+<h2>Euler-Maruyama Method<a class="headerlink" href="#euler-maruyama-method" title="Link to this heading">¶</a></h2>
+<p>The Euler-Maruyama method is a numerical technique used to approximate solutions to stochastic differential equations.
+It is an extension of the Euler method for ordinary differential equations, incorporating stochastic components.</p>
+<p>The method discretizes the time interval <span class="math notranslate nohighlight">\([0, T]\)</span> into <span class="math notranslate nohighlight">\(N\)</span> steps of size <span class="math notranslate nohighlight">\(\Delta t = T/N\)</span>.
+At each time step, the state variable is updated according to the formula:</p>
+<p><span class="math notranslate nohighlight">\(X_{t+\Delta t} = X_t + \mu(X_t, t) \Delta t + \sigma(X_t, t) \Delta W_t\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\Delta W_t\)</span> is a normally distributed random variable with mean <span class="math notranslate nohighlight">\(0\)</span> and variance <span class="math notranslate nohighlight">\(\Delta t\)</span>, representing the increment of the Wiener process.</p>
+<p>The method also requires the initial condition <span class="math notranslate nohighlight">\(X_0\)</span>, which is typically sampled from a specified distribution.</p>
+<section id="error-analysis">
+<h3>Error Analysis<a class="headerlink" href="#error-analysis" title="Link to this heading">¶</a></h3>
+<p>The strong error of the Euler-Maruyama method is defined as the expected value of the absolute difference between the true solution <span class="math notranslate nohighlight">\(X_T\)</span> and the numerical approximation <span class="math notranslate nohighlight">\(X_T^{\Delta t}\)</span> at time <span class="math notranslate nohighlight">\(T\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(E\left[\left\|X_T(W_t) - X_T^{\Delta t}(W_t)\right\|^2\right]\)</span></p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_T(W_t)\)</span> is the exact solution of the SDE at time <span class="math notranslate nohighlight">\(T\)</span> given the Wiener process <span class="math notranslate nohighlight">\(W_t\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_T^{\Delta t}(W_t)\)</span> is the approximation obtained using the Euler-Maruyama method with time step <span class="math notranslate nohighlight">\(\Delta t\)</span> via Wiener process <span class="math notranslate nohighlight">\(W_t\)</span>.</p></li>
+</ul>
+<p>For this definition of error, it can be shown that the Euler-Maruyama method has a strong convergence order of <span class="math notranslate nohighlight">\(0.5\)</span>, meaning that the error decreases proportionally to <span class="math notranslate nohighlight">\(\sqrt{\Delta t}\)</span> as the time step <span class="math notranslate nohighlight">\(\Delta t\)</span> approaches zero.</p>
+<p>The weak error is defined in terms of the expected value of a test function <span class="math notranslate nohighlight">\(\phi\)</span> applied to the solution:</p>
+<p><span class="math notranslate nohighlight">\(\left|E\left[\phi(X_T(W_t))\right] - E\left[\phi(X_T^{\Delta t}(W_t))\right]\right|\)</span></p>
+<p>For the weak error, the Euler-Maruyama method has a convergence order of <span class="math notranslate nohighlight">\(1\)</span>, meaning that the error decreases proportionally to <span class="math notranslate nohighlight">\(\Delta t\)</span> as the time step <span class="math notranslate nohighlight">\(\Delta t\)</span> approaches zero.
+A consequence of this is that the Euler-Maruyama method is particularly effective for approximating expectations of functionals of the solution, which is often the primary interest in applications involving SDEs.</p>
+</section>
+<section id="implementations">
+<h3>Implementations<a class="headerlink" href="#implementations" title="Link to this heading">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">zhai2022.euler_maruyama.</span></span><span class="sig-name descname"><span class="pre">trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Simulate paths of a stochastic differential equation (SDE) using the Euler-Maruyama method.
+This function computes the trajectories of an SDE given the initial conditions, number of steps, time step size,
+drift function, and diffusion function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X0</strong> (<em>numpy.ndarray</em>)</p></li>
+<li><p><strong>n_steps</strong> (<em>int</em>)</p></li>
+<li><p><strong>dt</strong> (<em>float</em>)</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>numpy.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>numpy.ndarray</em><em>]</em>)</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>numpy.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>numpy.ndarray</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>SDE:</dt><dd><p><span class="math notranslate nohighlight">\(dX_t = dt\text{drift}(X_t, t) + \text{diffusion}(X_t, t) dW_t \quad X_t\in\mathbb{R}^{d}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(W_t\)</span> is a standard Wiener process in <span class="math notranslate nohighlight">\(\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{drift}\in\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{diffusion}\in\mathbb{R}^{d\times d}\)</span>.</p>
+</dd>
+<dt>Discretization (Euler-Maruyama):</dt><dd><p><span class="math notranslate nohighlight">\(X_{k+1} = X_k + dt\text{drift}(X_k, t_k) + \text{diffusion}(X_k, t_k) dW_k\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(dW_k \sim \mathcal{N}(0, dt)\)</span></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X0</strong> (<em>np.ndarray</em>) – Initial condition with shape (n_samples, n_dim).</p></li>
+<li><p><strong>n_steps</strong> (<em>int</em>) – Number of time steps to simulate.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step size.</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>np.ndarray</em><em>]</em>) – Function to compute the drift term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the drift (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>), broadcasting permitted).</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>np.ndarray</em><em>]</em>) – Function to compute the diffusion term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the diffusion (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>, <cite>n_dim</cite>), broadcasting permitted).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>n_steps</cite> is negative.:</p></li>
+<li><p><strong>ValueError</strong> – If <cite>dt</cite> is non-positive.:</p></li>
+<li><p><strong>ValueError</strong> – If <cite>X0</cite> has incorrect shape.:</p></li>
+<li><p><strong>TypeError</strong> – If <cite>X0</cite> has incorrect dtype.:</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>np.ndarray</dt><dd><p>Simulated paths of the stochastic differential equation with shape (<cite>n_steps</cite> + 1, <cite>n_samples</cite>, <cite>n_dim</cite>) and the same dtype as <cite>X0</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Example usage of this function:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># model settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_dim</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">drift</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">diffusion</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_dim</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># scheme settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_agents</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="p">(</span><span class="n">n_agents</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drift</span><span class="p">,</span> <span class="n">diffusion</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">zhai2022.euler_maruyama.cuda.</span></span><span class="sig-name descname"><span class="pre">trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Simulate paths of a stochastic differential equation (SDE) using the Euler-Maruyama method.
+This function computes the trajectories of an SDE given the initial conditions, number of steps, time step size,
+drift function, and diffusion function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>X0</strong> (<em>Tensor</em>)</p></li>
+<li><p><strong>n_steps</strong> (<em>int</em>)</p></li>
+<li><p><strong>dt</strong> (<em>float</em>)</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>SDE:</dt><dd><p><span class="math notranslate nohighlight">\(dX_t = dt\text{drift}(X_t, t) + \text{diffusion}(X_t, t) dW_t \quad X_t\in\mathbb{R}^{d}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(W_t\)</span> is a standard Wiener process in <span class="math notranslate nohighlight">\(\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{drift}\in\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{diffusion}\in\mathbb{R}^{d\times d}\)</span>.</p>
+</dd>
+<dt>Discretization (Euler-Maruyama):</dt><dd><p><span class="math notranslate nohighlight">\(X_{k+1} = X_k + dt\text{drift}(X_k, t_k) + \text{diffusion}(X_k, t_k) dW_k\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(dW_k \sim \mathcal{N}(0, dt)\)</span></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X0</strong> (<em>torch.tensor</em>) – Initial condition with shape (n_samples, n_dim).</p></li>
+<li><p><strong>n_steps</strong> (<em>int</em>) – Number of time steps to simulate.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step size.</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.tensor</em><em>]</em>) – Function to compute the drift term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the drift (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>), broadcasting permitted).</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.tensor</em><em>]</em>) – Function to compute the diffusion term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the diffusion (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>, <cite>n_dim</cite>), broadcasting permitted).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If <cite>n_steps</cite> is negative.:</p></li>
+<li><p><strong>ValueError</strong> – If <cite>dt</cite> is non-positive.:</p></li>
+<li><p><strong>ValueError</strong> – If <cite>X0</cite> has incorrect shape.:</p></li>
+<li><p><strong>TypeError</strong> – If <cite>X0</cite> has incorrect dtype.:</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>torch.tensor</dt><dd><p>Simulated paths of the stochastic differential equation with shape (<cite>n_steps</cite> + 1, <cite>n_samples</cite>, <cite>n_dim</cite>) and the same dtype as <cite>X0</cite>.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Tensor</em></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Example usage of this function:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># model settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_dim</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">drift</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">diffusion</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_dim</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_state</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># scheme settings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_agents</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">initial_state</span><span class="p">,</span> <span class="p">(</span><span class="n">n_agents</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">(</span><span class="n">X0</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drift</span><span class="p">,</span> <span class="n">diffusion</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+</div>
+        </article>
+        <aside class="nftt-toc my-3">
+          
+          <div class="my-sm-1 my-lg-0 ps-xl-3 text-muted">
+            <button class="btn btn-link p-lg-0 mb-2 mb-lg-0 text-decoration-none nftt-toc-toggle d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#tocContents" aria-expanded="false" aria-controls="tocContents"
+            >On this page <i class="ms-2 bi bi-chevron-expand"></i></button>
+            <div class="title d-none d-lg-block">
+              <i class="bi bi-file-earmark-text"></i>&nbsp;&nbsp;<span class="small">On this page</span>
+            </div>
+            <div class="collapse nftt-toc-collapse" id="tocContents">
+              <nav id="TableOfContents">
+                <ul>
+<li><a class="reference internal" href="#">Monte Carlo Documentation</a><ul>
+<li><a class="reference internal" href="#euler-maruyama-method">Euler-Maruyama Method</a><ul>
+<li><a class="reference internal" href="#error-analysis">Error Analysis</a></li>
+<li><a class="reference internal" href="#implementations">Implementations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </nav>
+            </div>
+          </div>
+          
+        </aside>
+      </div>
+    </div>
+
+    <footer class="nftt-footer">
+      <nav id="paginator" class="py-4" aria-label="Documentation navigation">
+    <div class="container">
+      <ul class="pagination justify-content-between mb-0"><li class="d-flex page-item">
+            <a href="../bibliography.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: Bibliography">
+              <span class="prev-page"><i class="bi bi-caret-left"></i></span>
+              <div class="d-none d-sm-flex flex-column">
+                <span class="text-small text-start text-muted">Previous</span>
+                <span class="underline">Bibliography</span>
+              </div>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </nav>
+
+      <div class="py-5 px-4 px-md-3">
+  <div class="container">
+    
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <a class="brand-text d-inline-flex align-items-center mb-2 text-decoration-none" href="/" aria-label="Zhai2022">
+          <span class="fs-6 fw-bold">Zhai2022</span>
+        </a>
+        
+          <ul class="list-unstyled small text-muted">
+            <li>2025, Stefano Magrini Alunno</li>
+          </ul>
+        
+        <div class="built-with pt-2">
+          Built with <a href="http://sphinx-doc.org">Sphinx 8.1.3</a> and <a href="https://github.com/danirus/sphinx-nefertiti">Nefertiti 0.9.1</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    </footer>
+
+    <div class="modal modal-xl fade" id="nftt-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-xxl-down modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="nftt-modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="nftt-modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/docs-versions.js?v=08b0cbfb"></script>
+    <script src="../_static/sphinx-nefertiti.min.js?v=732b5b51"></script>
+    <script src="../_static/bootstrap.bundle.min.js?v=e96d90d1"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>
