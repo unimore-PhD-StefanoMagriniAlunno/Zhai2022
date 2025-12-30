@@ -33,9 +33,9 @@ def trajectory(
         dt : float
             Time step size.
         drift : Callable[[torch.tensor, float], torch.tensor]
-            Function to compute the drift term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the drift (with shape (`n_samples`,`n_dim`)).
+            Function to compute the drift term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the drift (with shape (`n_samples`, `n_dim`), broadcasting permitted).
         diffusion : Callable[[torch.tensor, float], torch.tensor]
-            Function to compute the diffusion term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the diffusion (with shape (`n_samples`,`n_dim`, `n_dim`)).
+            Function to compute the diffusion term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the diffusion (with shape (`n_samples`, `n_dim`, `n_dim`), broadcasting permitted).
 
     Raises
     ------
@@ -53,15 +53,19 @@ def trajectory(
     --------
     Example usage of this function:
 
-    >>> X0 = torch.zeros(2)
+    >>> # model settings
+    >>> n_dim = 2
+    >>> def drift(X, t):
+    >>>     return X
+    >>> def diffusion(X, t):
+    >>>     return torch.eye(n_dim)
+    >>> initial_state = torch.zeros(2)
+
+    >>> # scheme settings
+    >>> n_agents = 5000
     >>> n_steps = 1000
     >>> dt = 0.01
-
-    >>> def drift(X, t):
-    >>>     return X  # simple drift example
-
-    >>> def diffusion(X, t):
-    >>>     return torch.eye(X.shape[1])  # simple diffusion example
+    >>> X0 = torch.tile(initial_state, (n_agents, 1))
 
     >>> X = trajectory(X0, n_steps, dt, drift, diffusion)
     """
