@@ -50,3 +50,10 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
+      - id: sphinx
+        name: documentation
+        entry: pdm run sphinx-build -b html -a docs/sphinx/source docs/sphinx/build
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -20,4 +20,5 @@ This project involves ...
    :maxdepth: 2
    :caption: Contents:
 
-   docs/monte_carlo/euler_maruyama
+   bibliography
+   rst_files/euler_maruyama

@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:3999690178440d81b155bd67c8c068a00b6183bba6733366f4852af11f868c84"
+content_hash = "sha256:5df897f934078fbf466d03201b24f617cb85ceec7aa81499d50fecbd4fbe2b99"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -1618,6 +1618,17 @@ files = [
 ]
 
 [[package]]
+name = "latexcodec"
+version = "3.0.1"
+requires_python = ">=3.9"
+summary = "A lexer and codec to work with LaTeX code in Python."
+groups = ["default"]
+files = [
+    {file = "latexcodec-3.0.1-py3-none-any.whl", hash = "sha256:a9eb8200bff693f0437a69581f7579eb6bca25c4193515c09900ce76451e452e"},
+    {file = "latexcodec-3.0.1.tar.gz", hash = "sha256:e78a6911cd72f9dec35031c6ec23584de6842bfbc4610a9678868d14cdfb0357"},
+]
+
+[[package]]
 name = "libclang"
 version = "18.1.1"
 summary = "Clang Python Bindings, mirrored from the official LLVM repo: https://github.com/llvm/llvm-project/tree/main/clang/bindings/python, to make the installation process easier."
@@ -2989,6 +3000,37 @@ files = [
 ]
 
 [[package]]
+name = "pybtex"
+version = "0.25.1"
+requires_python = ">=3.6"
+summary = "A BibTeX-compatible bibliography processor in Python"
+groups = ["default"]
+dependencies = [
+    "PyYAML>=3.01",
+    "importlib-metadata; python_version < \"3.10\"",
+    "latexcodec>=1.0.4",
+]
+files = [
+    {file = "pybtex-0.25.1-py2.py3-none-any.whl", hash = "sha256:9053b0d619409a0a83f38abad5d9921de5f7b3ede00742beafcd9f10ad0d8c5c"},
+    {file = "pybtex-0.25.1.tar.gz", hash = "sha256:9eaf90267c7e83e225af89fea65c370afbf65f458220d3946a9e3049e1eca491"},
+]
+
+[[package]]
+name = "pybtex-docutils"
+version = "1.0.3"
+requires_python = ">=3.7"
+summary = "A docutils backend for pybtex."
+groups = ["default"]
+dependencies = [
+    "docutils>=0.14",
+    "pybtex>=0.16",
+]
+files = [
+    {file = "pybtex-docutils-1.0.3.tar.gz", hash = "sha256:3a7ebdf92b593e00e8c1c538aa9a20bca5d92d84231124715acc964d51d93c6b"},
+    {file = "pybtex_docutils-1.0.3-py3-none-any.whl", hash = "sha256:8fd290d2ae48e32fcb54d86b0efb8d573198653c7e2447d5bec5847095f430b9"},
+]
+
+[[package]]
 name = "pycparser"
 version = "2.23"
 requires_python = ">=3.8"
@@ -3778,6 +3820,24 @@ groups = ["default"]
 files = [
     {file = "sphinxcontrib_applehelp-2.0.0-py3-none-any.whl", hash = "sha256:4cd3f0ec4ac5dd9c17ec65e9ab272c9b867ea77425228e68ecf08d6b28ddbdb5"},
     {file = "sphinxcontrib_applehelp-2.0.0.tar.gz", hash = "sha256:2f29ef331735ce958efa4734873f084941970894c6090408b079c61b2e1c06d1"},
+]
+
+[[package]]
+name = "sphinxcontrib-bibtex"
+version = "2.6.5"
+requires_python = ">=3.9"
+summary = "Sphinx extension for BibTeX style citations."
+groups = ["default"]
+dependencies = [
+    "Sphinx>=3.5",
+    "docutils!=0.18.*,!=0.19.*,>=0.8",
+    "importlib-metadata>=3.6; python_version < \"3.10\"",
+    "pybtex-docutils>=1.0.0",
+    "pybtex>=0.25",
+]
+files = [
+    {file = "sphinxcontrib_bibtex-2.6.5-py3-none-any.whl", hash = "sha256:455ea4509642ea0b28ede3721550273626f85af65af01f161bfd8e19dc1edd7d"},
+    {file = "sphinxcontrib_bibtex-2.6.5.tar.gz", hash = "sha256:9b3224dd6fece9268ebd8c905dc0a83ff2f6c54148a9235fe70e9d1e9ff149c0"},
 ]
 
 [[package]]

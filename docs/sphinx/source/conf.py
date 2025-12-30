@@ -24,6 +24,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
     "sphinx.ext.napoleon",
+    "sphinxcontrib.bibtex",
 ]
 
 templates_path = ["_templates"]
@@ -33,15 +34,11 @@ exclude_patterns: list = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-# builtin themes: bizstyle
-
-# nefertiti
 html_theme = "sphinx_nefertiti"
 html_static_path = ["_static"]
 
 # -- Options for autodoc extension ---------------------------------------------
 
-# Aggiungi queste righe nel tuo conf.py
 autodoc_default_options = {
     "members": True,  # Mostra i membri della classe o della funzione
     "show-inheritance": True,  # Mostra l'ereditarietà per le classi
@@ -53,8 +50,17 @@ autodoc_default_options = {
 }
 autodoc_typehints = "description"  # Mostra i tipi come descrizione
 autodoc_mock_imports = ["numpy", "pandas"]  # Mock dei moduli esterni
-autodoc_member_order = "bysource"
-autodoc_inherit_docstrings = True
-autodoc_add_module_names = True
-autodoc_member_order = "alphabetical"
-autodoc_default_flags = ["members", "undoc-members", "show-inheritance"]
+autodoc_member_order = "bysource"  # Ordina i membri come appaiono nel codice sorgente
+autodoc_inherit_docstrings = True  # Eredita le docstring dalle classi base
+autodoc_add_module_names = True  # Aggiunge il nome del modulo alle firme
+autodoc_member_order = "alphabetical"  # Ordina i membri in ordine alfabetico
+autodoc_default_flags = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+]  # Flag predefiniti
+
+
+# -- Options for bibtex extension ---------------------------------------------
+
+bibtex_bibfiles = ["references.bib"]
