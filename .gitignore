@@ -210,4 +210,3 @@ __marimo__/
 # Ignore all pdf files
 *.pdf
 *.mp4
-docs/sphinx/*
