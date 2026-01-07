@@ -63,7 +63,7 @@ repos:
       - id: sphinx
         files: ^(src|tests)/.*\.py$
         name: documentation
-        entry: pdm run sphinx-build -b html -a sphinx/source docs/sphinx
+        entry: pdm run sphinx-build -b html -a sphinx/source docs
         language: system
         pass_filenames: false
         always_run: true
