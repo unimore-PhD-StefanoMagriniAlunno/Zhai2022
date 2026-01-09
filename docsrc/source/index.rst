@@ -22,3 +22,4 @@ This project involves ...
 
    bibliography
    rst_files/sde
+   rst_files/differential
