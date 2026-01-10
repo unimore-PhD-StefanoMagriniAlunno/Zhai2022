@@ -3,6 +3,7 @@ import pytest
 __all__ = ["pytest"]
 
 from zhai2022.sde import Model
+from zhai2022.sde.euler_maruyama import EulerMaruyama
 
 
 def test_sde():
@@ -24,9 +25,6 @@ def test_sde():
     assert model.n_dim == 2
     assert model.initial_time == 0.0
     assert model.sample_initial_state(5).shape == (5, 2)
-
-
-from zhai2022.sde.euler_maruyama import EulerMaruyama
 
 
 def test_euler_maruyama():

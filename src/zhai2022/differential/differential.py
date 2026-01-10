@@ -35,7 +35,7 @@ class Differential:
             >>> def f(x):
             ...     return torch.stack([x**2, x**3], dim=-2)
             >>> # Get the Nabla callable object
-            >>> nabla_f = diff(f)
+            >>> nabla_f = diff.nabla(f)
             """
             if n < 0:
                 raise ValueError(
@@ -187,6 +187,30 @@ class Differential:
             self.__n = n
             self.__create_graph = create_graph
 
+        @property
+        def order(self) -> int:
+            """
+            Get the order of the Differential.
+
+            Returns
+            -------
+            int
+                The order of the Differential.
+            """
+            return self.__n
+
+        @property
+        def create_graph(self) -> bool:
+            """
+            Get whether the computation graph is created.
+
+            Returns
+            -------
+            bool
+                True if the computation graph is created, False otherwise.
+            """
+            return self.__create_graph
+
         def __call__(
             self, x: torch.Tensor, full_trace: bool = False
         ) -> Tuple[torch.Tensor, ...]:
@@ -267,7 +291,7 @@ class Differential:
         """
         Initialize the Differential class with the order of Differential.
 
-        This class represent the operator :math:`\\nabla^n` and the user can obtain the Nabla and Div callable objects using the methods `__call__` and `div`, respectively.
+        This class represent the operator :math:`\\nabla^n` and the user can obtain the Nabla and Div callable objects using the methods `nabla` and `div`, respectively.
 
         Parameters
         ----------
@@ -287,9 +311,31 @@ class Differential:
         self.__n = n
         self.__create_graph = create_graph
 
-    def __call__(
-        self, f: Callable[[torch.Tensor], torch.Tensor]
-    ) -> "Differential.Nabla":
+    @property
+    def order(self) -> int:
+        """
+        Get the order of the Differential.
+
+        Returns
+        -------
+        int
+            The order of the Differential.
+        """
+        return self.__n
+
+    @property
+    def create_graph(self) -> bool:
+        """
+        Get whether the computation graph is created.
+
+        Returns
+        -------
+        bool
+            True if the computation graph is created, False otherwise.
+        """
+        return self.__create_graph
+
+    def nabla(self, f: Callable[[torch.Tensor], torch.Tensor]) -> "Differential.Nabla":
         return Differential.Nabla(
             f,
             self.__n,
