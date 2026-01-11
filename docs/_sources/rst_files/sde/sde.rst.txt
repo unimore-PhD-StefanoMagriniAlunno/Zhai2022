@@ -35,5 +35,5 @@ Implementations
     :maxdepth: 2
     :caption: Contents:
 
-    sde/euler_maruyama
-    sde/torch
+    euler_maruyama/euler_maruyama
+    torch/torch

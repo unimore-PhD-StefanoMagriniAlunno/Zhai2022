@@ -19,5 +19,5 @@ In this documentation there are also some numerical application.
    :caption: Contents:
 
    bibliography
-   rst_files/sde
-   rst_files/differential
+   rst_files/sde/sde
+   rst_files/differential/differential
