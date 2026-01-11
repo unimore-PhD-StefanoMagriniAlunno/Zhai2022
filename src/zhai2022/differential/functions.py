@@ -83,7 +83,7 @@ def div_at(
     """
     Compute the divergence of a function at a given point.
 
-    In particular, :math:`\\text{Div}(f)_{b_1\\ldotsb_n} = \\sum_{a_1\\ldots a_m} \\frac{df_{b_1...b_n}}{dx_{a_1\\ldots a_m}}`
+    In particular, :math:`\\text{Div}(f)_{b_1\\ldotsb_n} = \\sum_{a_1\\ldots a_m} \\frac{df_{b_1\\ldots b_n a_1\\ldots a_m}}{dx_{a_1\\ldots a_m}}`
 
     Parameters
     ----------
@@ -105,7 +105,7 @@ def div_at(
     torch.Tensor
         A tensor representing the divergence with shape (b1,...),
         which is the sum of the diagonal elements of the Jacobian matrix of f at x.
-        In particular, if D is the returned tensor, then D[b1,...,bn] = sum_i df_b1...bn / dx_ai.
+        In particular, if D is the returned tensor, then D[b1,...,bn] = sum_i df_{b1...bn,i} / dx_i.
 
     Examples
     --------

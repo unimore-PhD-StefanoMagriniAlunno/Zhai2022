@@ -36,3 +36,4 @@ Implementations
     :caption: Contents:
 
     sde/euler_maruyama
+    sde/torch

@@ -1,6 +1,6 @@
 # Zhai2022
 
-Implementation of the methods described in: "A deep learning method for solving Fokker-Planck equations", Zhai, Dobson, Li (2022) (see doc folder).
+Implementation of the methods described in: "A deep learning method for solving Fokker-Planck equations", Zhai, Dobson, Li (2022).
 
 ## Author and credits
 
@@ -18,7 +18,14 @@ This research has been carried out within the ADAMUS project at the University o
 
 This project is released under the **MIT** License. See the `LICENSE` file for details.
 
-## Get start
+## Installation
+
+Check python version:
+```
+python3 --version
+```
+Use python version <=3.12 for a stable software (last update January 11 2026).
+
 Check pdm installation:
 ```
 pdm --version
@@ -26,12 +33,14 @@ pdm --version
 
 Install packages:
 ```
+export PDM_IGNORE_ACTIVE_VENV=1
 pdm install
-```
-
-Make the documentation
-```
 pdm run pre-commit install
-pdm run pre-commit run sphinx
 ```
-you can find the documentation in build/html/index.html
+When `PDM_IGNORE_ACTIVE_VENV` is enable pdm builds a local environment (in the folder .venv) with all packages.
+
+## Quick start
+
+## Notebook & Docs
+
+## Changelog / Roadmap

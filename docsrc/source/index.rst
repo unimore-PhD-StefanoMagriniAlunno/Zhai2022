@@ -1,19 +1,17 @@
-.. Zhai2022 documentation master file, created by
-   sphinx-quickstart on Mon Dec 29 17:57:55 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Zhai2022 documentation
 ======================
 
-.. Add your content using ``reStructuredText`` syntax. See the
-.. `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-.. documentation for details.
+This documentation contains an explaination of the code in `src/zhai2022` folder.
 
+You can import the module with:
 
-Welcome to the Zhai2022 project's documentation!
+.. code-block:: python
 
-This project involves ...
+   import zhai2022
+   import zhai2022.sde
+   import zhai2022.differential
+
+In this documentation there are also some numerical application.
 
 
 .. toctree::
