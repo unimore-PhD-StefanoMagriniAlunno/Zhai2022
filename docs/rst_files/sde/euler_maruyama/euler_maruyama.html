@@ -281,7 +281,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<em>Model</em>)</p></li>
-<li><p><strong>dt_schedule</strong> (<em>numpy.ndarray</em>)</p></li>
+<li><p><strong>dt_schedule</strong> (<em>Tensor</em>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -293,7 +293,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>model</strong> (<em>Model</em>) – An instance of the SDE model defining the drift and diffusion terms.</p></li>
-<li><p><strong>dt_schedule</strong> (<em>np.ndarray</em>) – A 1D array of positive floats representing the time step sizes for each iteration.</p></li>
+<li><p><strong>dt_schedule</strong> (<em>torch.Tensor</em>) – A 1D array of positive floats representing the time step sizes for each iteration.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -305,10 +305,24 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dt_schedule</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt_schedule</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">euler_maruyama</span> <span class="o">=</span> <span class="n">EulerMaruyama</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dt_schedule</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">device</span></em></dt>
+<dd><p>Device on which the dt_schedule tensor is stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Device of the dt_schedule tensor.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>torch.device</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -317,7 +331,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 <dd><p>Generate samples at the final time using the Euler-Maruyama scheme.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -333,7 +347,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>np.ndarray</dt><dd><p>Updated state after applying all time steps in <cite>dt_schedule</cite>. Shape: (n_samples, n_dim)</p>
+<dt>torch.Tensor</dt><dd><p>Updated state after applying all time steps in <cite>dt_schedule</cite>. Shape: (n_samples, n_dim)</p>
 </dd>
 </dl>
 </p>
@@ -352,7 +366,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 <dd><p>Generate a trajectory using the Euler-Maruyama scheme.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
@@ -368,7 +382,7 @@ Consequently, the Euler-Maruyama method is particularly effective for approximat
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>np.ndarray</dt><dd><p>Trajectory of states. Shape: (n_steps + 1, n_samples, n_dim)</p>
+<dt>torch.Tensor</dt><dd><p>Trajectory of states. Shape: (n_steps + 1, n_samples, n_dim)</p>
 </dd>
 </dl>
 </p>

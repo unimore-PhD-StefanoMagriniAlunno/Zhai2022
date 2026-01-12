@@ -87,14 +87,19 @@ class EulerMaruyama:
             >>> trajectory = euler_maruyama.get_trajectory(n_samples=100)
         """
         Xtraj = torch.zeros(
-            (self.n_steps + 1, n_samples, self.model.n_dim), dtype=torch.float64
+            (self.n_steps + 1, n_samples, self.model.n_dim),
+            dtype=torch.float64,
+            device=self.device,
         )
         Xtraj[0] = self.model.sample_initial_state(n_samples)
         t_current = self.model.initial_time
         for k in range(1, self.n_steps + 1):
             dt = self.dt_schedule[k - 1]
             dW = torch.randn(
-                n_samples, self.model.n_dim, dtype=torch.float64
+                n_samples,
+                self.model.n_dim,
+                dtype=torch.float64,
+                device=self.dt_schedule.device,
             ) * torch.sqrt(dt)
             try:
                 drift_term = self.model.drift(Xtraj[k - 1], t_current)
@@ -149,7 +154,10 @@ class EulerMaruyama:
         for k in range(self.n_steps):
             dt = self.dt_schedule[k]
             dW = torch.randn(
-                n_samples, self.model.n_dim, dtype=torch.float64
+                n_samples,
+                self.model.n_dim,
+                dtype=torch.float64,
+                device=self.dt_schedule.device,
             ) * torch.sqrt(dt)
             try:
                 drift_term = self.model.drift(X_current, t_current)
@@ -172,3 +180,14 @@ class EulerMaruyama:
                 )
                 t_current += dt
         return X_current
+
+    @property
+    def device(self) -> torch.device:
+        """Device on which the dt_schedule tensor is stored.
+
+        Returns
+        -------
+            torch.device
+                Device of the dt_schedule tensor.
+        """
+        return self.dt_schedule.device
