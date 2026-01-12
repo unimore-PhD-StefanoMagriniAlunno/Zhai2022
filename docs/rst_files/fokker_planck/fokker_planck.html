@@ -16,9 +16,9 @@
       <meta name="theme-color" content="#0DCAF0" />
     
     
-      <title>SDE Model Documentation &mdash; Zhai2022 0.1.0 documentation</title>
+      <title>Fokker-Planck Equation Model &mdash; Zhai2022 0.1.0 documentation</title>
     
-    <link rel="canonical" href="rst_files/sde/sde" />
+    <link rel="canonical" href="rst_files/fokker_planck/fokker_planck" />
           <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8e8a900e" /><!-- add (1) -->
           <link rel="stylesheet" type="text/css" href="../../_static/sphinx-nefertiti-default.min.css?v=5597b8b1" /><!-- add (1) -->
           <link rel="stylesheet" type="text/css" href="../../_static/fonts/nunito/stylesheet.css?v=abf98f06" /><!-- add (1) -->
@@ -29,8 +29,8 @@
         <link rel="index" title="Index" href="../../genindex.html" />
         <link rel="search" title="Search" href="../../search.html" />
         <link rel="top" title="Zhai2022 0.1.0 documentation" href="#" />
-        <link rel="next" title="Euler-Maruyama Method Documentation" href="euler_maruyama/euler_maruyama.html" />
-        <link rel="prev" title="Bibliography" href="../../bibliography.html" />
+        <link rel="next" title="Gaussian Steady State for Fokker-Planck Equations" href="gaussian.html" />
+        <link rel="prev" title="Differential Module Documentation" href="../differential/differential.html" />
     <style>
       :root {
         --nftt-body-font-family: "Nunito", var(--nftt-font-sans-serif) !important;
@@ -190,13 +190,13 @@
     <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SDE Model Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="euler_maruyama/euler_maruyama.html">Euler-Maruyama Method Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sde/sde.html">SDE Model Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../sde/euler_maruyama/euler_maruyama.html">Euler-Maruyama Method Documentation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../differential/differential.html">Differential Module Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fokker_planck/fokker_planck.html">Fokker-Planck Equation Model</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../fokker_planck/gaussian.html">Gaussian Steady State for Fokker-Planck Equations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fokker-Planck Equation Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gaussian.html">Gaussian Steady State for Fokker-Planck Equations</a></li>
 </ul>
 </li>
 </ul>
@@ -218,108 +218,127 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="../../index.html">Start</a></li>
-      <li class="breadcrumb-item active" aria-current="page">SDE Model Documentation</li>
+      <li class="breadcrumb-item active" aria-current="page">Fokker-Planck Equation Model</li>
     </ol>
   </nav>
   
     <div class="fs085">
-        <a href="../../_sources/rst_files/sde/sde.rst.txt"  rel="nofollow" aria-label="Show source of this document"><i class="bi bi-file-earmark-code"></i></a>
+        <a href="../../_sources/rst_files/fokker_planck/fokker_planck.rst.txt"  rel="nofollow" aria-label="Show source of this document"><i class="bi bi-file-earmark-code"></i></a>
     </div>
   
 </div>
             
-    <section id="sde-model-documentation">
-<h1>SDE Model Documentation<a class="headerlink" href="#sde-model-documentation" title="Link to this heading">¶</a></h1>
-<p>This module implements a class that represents the SDE:</p>
-<p><span class="math notranslate nohighlight">\(dX_t = \mu(X_t, t) dt + \sigma(X_t, t) dW_t\)</span></p>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(X_t\)</span> is the state variable at time <span class="math notranslate nohighlight">\(t\)</span>, it is a stochastic process in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the drift coefficient, a function <span class="math notranslate nohighlight">\(\mu: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the diffusion coefficient, a function <span class="math notranslate nohighlight">\(\sigma: \mathbb{R}^n \times \mathbb{R}^+ \to \mathbb{R}^n\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(W_t\)</span> is a Wiener process (or Brownian motion) in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p></li>
-</ul>
-<p>In <span id="id1">[<a class="reference internal" href="../../bibliography.html#id2" title="Bernt Oksendal. Stochastic Differential Equations: An Introduction with Applications. Springer, 2003.">1</a>]</span>, it is proven that the following conditions ensure the existence and uniqueness of solutions:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> should be measurable functions.</p></li>
-<li><p>They must satisfy the Lipschitz condition: there exists a constant <span class="math notranslate nohighlight">\(L &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}^+\)</span>, <span class="math notranslate nohighlight">\(\|\mu(x, t) - \mu(y, t)\| + \|\sigma(x, t) - \sigma(y, t)\| \leq L \|x - y\|\)</span>.</p></li>
-<li><p>Additionally, they must satisfy the linear growth condition: there exists a constant <span class="math notranslate nohighlight">\(K &gt; 0\)</span> such that for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> and <span class="math notranslate nohighlight">\(t \in \mathbb{R}^+\)</span>, <span class="math notranslate nohighlight">\(\|\mu(x, t)\|^2 + \|\sigma(x, t)\|^2 \leq K(1 + \|x\|^2)\)</span>.</p></li>
-</ul>
-<p>In summary, these conditions ensure that the SDE has a unique solution, which is essential for the stability and reliability of numerical methods like the Euler-Maruyama method.</p>
+    <section id="fokker-planck-equation-model">
+<h1>Fokker-Planck Equation Model<a class="headerlink" href="#fokker-planck-equation-model" title="Link to this heading">¶</a></h1>
+<p>This module provides a class to model the Fokker-Planck equation, which describes the time evolution of the probability density function of the velocity of a particle under the influence of forces such as drag and random forces.</p>
+<p>Formally, the Fokker-Planck equation is given by:</p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial u}{\partial t} = -\nabla \cdot (b(x, t) u) + \frac{1}{2} \nabla^2 : (a(x, t) u)\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(u(x, t)\)</span> is the probability density function, <span class="math notranslate nohighlight">\(b(x, t)\)</span> is the drift coefficient, and <span class="math notranslate nohighlight">\(a(x, t)\)</span> is the diffusion coefficient.</p>
+<p>This module uses the <cite>Differential</cite> class from the <cite>zhai2022.differential</cite> module to compute the necessary derivatives.</p>
 <section id="implementations">
 <h2>Implementations<a class="headerlink" href="#implementations" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zhai2022.sde.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_dim</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zhai2022.fokker_planck.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A class representing a stochastic differential equation (SDE) model defined by its drift and diffusion functions, along with an initial state generator and the dimension of the state space.</p>
-<dl>
-<dt>SDE:</dt><dd><p><span class="math notranslate nohighlight">\(dX_t = dt\text{drift}(X_t, t) + \text{diffusion}(X_t, t) dW_t \quad X_t\in\mathbb{R}^{d}\)</span></p>
-<p>where <span class="math notranslate nohighlight">\(W_t\)</span> is a standard Wiener process in <span class="math notranslate nohighlight">\(\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{drift}\in\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(\text{diffusion}\in\mathbb{R}^{d\times d}\)</span>.</p>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
 <li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
-<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
-<li><p><strong>initial_time</strong> (<em>float</em>)</p></li>
-<li><p><strong>n_dim</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_dim</span></span></em><span class="sig-paren">)</span></dt>
-<dd><p>Initializes the Model with drift, diffusion, initial state, and dimension.</p>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusion</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This class implements a Fokker Planck model.</p>
+<p>In particular, we have: <span class="math notranslate nohighlight">\(u_t = \sum_i \left(\text{drift}\left(x, t\right)_i u\right)_{x_i} + \sum_{ij} \left(\text{diffusion}\left(x, t\right)_{ij}u\right)_{x_i x_j}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(u_t\)</span> is the partial derivative of the density with respect to time, <span class="math notranslate nohighlight">\(\text{drift}:\mathbb{R}^d\times \mathbb{R} \to \mathbb{R}^d\)</span> and <span class="math notranslate nohighlight">\(\text{diffusion}:\mathbb{R}^d\times \mathbb{R} \to \mathbb{R}^{d\times d}\)</span>.</p>
+<p>This class provides a batch implementation of the drift and diffusion functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to compute the drift term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the drift (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)).</p></li>
-<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to compute the diffusion term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the diffusion (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>, <cite>n_dim</cite>)).</p></li>
-<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to generate the initial state given the number of samples.</p></li>
-<li><p><strong>initial_time</strong> (<em>float</em>) – The initial time of the SDE.</p></li>
-<li><p><strong>n_dim</strong> (<em>int</em>) – The dimension of the state space.</p></li>
-<li><p><strong>self</strong> (<em>Model</em>)</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – It implements the function <span class="math notranslate nohighlight">\(\text{drift}\left(x, t\right)\)</span> in the Fokker-Planck equation.
+This function takes as input a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N, d).</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – It implements the function <span class="math notranslate nohighlight">\(\text{diffusion}\left(x, t\right)\)</span> in the Fokker-Planck equation.
+This function takes as input a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N, d, d).</p></li>
+<li><p><strong>**kwargs</strong> (<em>additional arguments</em>) – Additional arguments to encrease the performance of this class.
+For a simpler notation, the type of the Fokker-Planck solution <span class="math notranslate nohighlight">\(u_t\)</span>, defined as <cite>Callable[[Callable[[torch.Tensor, float], torch.Tensor], torch.Tensor, float], torch.Tensor]</cite>,is renamed as <cite>T_u</cite>
+In particular, the user can provide custom implementations of the following functions:
+- <strong>div_drift</strong> : <cite>Callable[[T_u, torch.Tensor, float], torch.Tensor]</cite>
+to compute the divergence of the drift term, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
+- <strong>div2_diffusion</strong> : <cite>Callable[[T_u, torch.Tensor, float], torch.Tensor]</cite>
+to compute the divergence of the diffusion term, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
+- <strong>u_t</strong> : <cite>Callable[[T_u, torch.Tensor, float], torch.Tensor]</cite>
+to compute the partial derivative of the density with respect to time, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
+If u_t is defined, it overrides the other two functions. Otherwise, if div_drift and/or div2_diffusion are defined, they override the default implementations.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – <cite>n_dim</cite> is not a positive integer.:</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – <cite>div_drift</cite> must be a callable function:</p></li>
+<li><p><strong>TypeError</strong> – <cite>div2_diffusion</cite> must be a callable function:</p></li>
+<li><p><strong>TypeError</strong> – <cite>u_t</cite> must be a callable function:</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define drift, diffusion, and initial state functions</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">drift</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="o">-</span><span class="n">X</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">diffusion</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">initial_state</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a Model instance</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">diffusion</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">initial_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">diffusion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em></dt>
-<dd><p>Returns the diffusion function.</p>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">div2_diffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This method returns the double divergence of the diffusion term. Methematically it return <span class="math notranslate nohighlight">\(\nabla_x^2 \cdot (\Sigma u)\)</span></p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The diffusion function.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Callable[[torch.Tensor, float], torch.Tensor]</p>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>u</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – This function takes a tensor with shape (N, d) and a float (time) and returns a tensor with shape (N,).</p></li>
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – A tensor with shape (N, d).</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – A float representing the time.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>torch.Tensor:</dt><dd><p>A tensor with shape (N,).</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">div_drift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This method returns the divergence of the drift term. Methematically it returns <span class="math notranslate nohighlight">\(\nabla_x \cdot (fu)\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>u</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – This function takes a tensor with shape (N, d) and a float (time) and returns a tensor with shape (N,).</p></li>
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – A tensor with shape (N, d).</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – A float representing the time.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>torch.Tensor:</dt><dd><p>A tensor with shape (N,).</p>
+</dd>
+</dl>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -327,79 +346,31 @@
 <dl class="py property">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drift</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em></dt>
-<dd><p>Returns the drift function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The drift function.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Callable[[torch.Tensor, float], torch.Tensor]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em></dt>
-<dd><p>Returns the initial time of the SDE.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The initial time.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em></dt>
-<dd><p>Returns the dimension of the state space.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The dimension of the state space.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">sample_initial_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em><span class="sig-paren">)</span></dt>
-<dd><p>Samples the initial state for a given number of samples.</p>
+<span class="sig-name descname"><span class="pre">u_t</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>This method returns the derivative <span class="math notranslate nohighlight">\(u_t = -\sum_i\left(f_iu\right)_{x_i} + \frac{1}{2}\sum_{ij}(\Sigma_{ij} u)_{x_ix_j}\)</span></p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>n_samples</strong> (<em>int</em>) – Number of samples to generate.</p></li>
-<li><p><strong>self</strong> (<em>Model</em>)</p></li>
+<li><p><strong>u</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – This function takes a tensor with shape (N, d) and a float (time) and returns a tensor with shape (N,).</p></li>
+<li><p><strong>x</strong> (<em>torch.Tensor</em>) – A tensor with shape (N, d).</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – A float representing the time.</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – <cite>n_samples</cite> is not a positive integer.:</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>torch.Tensor</dt><dd><p>Initial state with shape (n_samples, n_dim).</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>torch.Tensor:</dt><dd><p>A tensor with shape (N,).</p>
 </dd>
 </dl>
 </p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a Model instance (assuming drift, diffusion, and initial_state are defined)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">diffusion</span><span class="p">,</span> <span class="n">initial_state</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Sample initial state for 5 samples</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_states</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sample_initial_state</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </dd></dl>
@@ -407,8 +378,8 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="euler_maruyama/euler_maruyama.html">Euler-Maruyama Method Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="euler_maruyama/euler_maruyama.html#error-analysis">Error Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gaussian.html">Gaussian Steady State for Fokker-Planck Equations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gaussian.html#implementations">Implementations</a></li>
 </ul>
 </li>
 </ul>
@@ -429,7 +400,7 @@
             <div class="collapse nftt-toc-collapse" id="tocContents">
               <nav id="TableOfContents">
                 <ul>
-<li><a class="reference internal" href="#">SDE Model Documentation</a><ul>
+<li><a class="reference internal" href="#">Fokker-Planck Equation Model</a><ul>
 <li><a class="reference internal" href="#implementations">Implementations</a></li>
 </ul>
 </li>
@@ -447,19 +418,19 @@
       <nav id="paginator" class="py-4" aria-label="Documentation navigation">
     <div class="container">
       <ul class="pagination justify-content-between mb-0"><li class="d-flex page-item">
-            <a href="../../bibliography.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: Bibliography">
+            <a href="../differential/differential.html" class="d-flex px-5 align-items-end" rel="prev" aria-label="Previous page: Differential Module Documentation">
               <span class="prev-page"><i class="bi bi-caret-left"></i></span>
               <div class="d-none d-sm-flex flex-column">
                 <span class="text-small text-start text-muted">Previous</span>
-                <span class="underline">Bibliography</span>
+                <span class="underline">Differential Module Documentation</span>
               </div>
             </a>
           </li>
         <li class="d-flex page-item ms-auto">
-            <a href="euler_maruyama/euler_maruyama.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: Euler-Maruyama Method Documentation">
+            <a href="gaussian.html" class="d-flex px-5 align-items-end" rel="next" aria-label="Next page: Gaussian Steady State for Fokker-Planck Equations">
               <div class="d-flex flex-column">
                 <span class="text-small text-end text-start text-muted">Next</span>
-                <span class="underline">Euler-Maruyama Method Documentation</span>
+                <span class="underline">Gaussian Steady State for Fokker-Planck Equations</span>
               </div>
               <span class="next-page"><i class="bi bi-caret-right"></i></span>
             </a>

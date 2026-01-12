@@ -21,3 +21,4 @@ In this documentation there are also some numerical application.
    bibliography
    rst_files/sde/sde
    rst_files/differential/differential
+   rst_files/fokker_planck/fokker_planck

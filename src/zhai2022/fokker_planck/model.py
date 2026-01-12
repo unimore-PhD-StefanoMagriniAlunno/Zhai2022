@@ -29,17 +29,13 @@ class Model:
             This function takes as input a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N, d, d).
         **kwargs : additional arguments
             Additional arguments to encrease the performance of this class.
-            For a simpler notation, the type of the Fokker-Planck solution :math:`u_t`, defined as:
-            ```python
-            Callable[[Callable[[torch.Tensor, float], torch.Tensor], torch.Tensor, float], torch.Tensor]
-            ```
-            is renamed as `T_u`
+            For a simpler notation, the type of the Fokker-Planck solution :math:`u_t`, defined as `Callable[[Callable[[torch.Tensor, float], torch.Tensor], torch.Tensor, float], torch.Tensor]`,is renamed as `T_u`
             In particular, the user can provide custom implementations of the following functions:
-            - div_drift : Callable[[T_u, torch.Tensor, float], torch.Tensor]
+            - **div_drift** : `Callable[[T_u, torch.Tensor, float], torch.Tensor]`
             to compute the divergence of the drift term, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
-            - div2_diffusion : Callable[[T_u, torch.Tensor, float], torch.Tensor]
+            - **div2_diffusion** : `Callable[[T_u, torch.Tensor, float], torch.Tensor]`
             to compute the divergence of the diffusion term, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
-            - u_t : Callable[[T_u, torch.Tensor, float], torch.Tensor]
+            - **u_t** : `Callable[[T_u, torch.Tensor, float], torch.Tensor]`
             to compute the partial derivative of the density with respect to time, it takes as input a solution, a tensor of shape (N, d) and a float (time) and returns a tensor of shape (N,).
             If u_t is defined, it overrides the other two functions. Otherwise, if div_drift and/or div2_diffusion are defined, they override the default implementations.
 
