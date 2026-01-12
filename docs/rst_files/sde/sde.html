@@ -192,10 +192,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SDE Model Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="euler_maruyama/euler_maruyama.html">Euler-Maruyama Method Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="torch/torch.html">Torch version of SDE Module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="torch/euler_maruyama/euler_maruyama.html">Torch version of Euler-Maruyama Module</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../differential/differential.html">Differential Module Documentation</a></li>
@@ -261,9 +257,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>numpy.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>numpy.ndarray</em><em>]</em>)</p></li>
-<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>numpy.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>numpy.ndarray</em><em>]</em>)</p></li>
-<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>numpy.ndarray</em><em>]</em>)</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
+<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>Tensor</em><em>]</em>)</p></li>
 <li><p><strong>initial_time</strong> (<em>float</em>)</p></li>
 <li><p><strong>n_dim</strong> (<em>int</em>)</p></li>
 </ul>
@@ -276,12 +272,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>self</strong> (<em>Model</em>)</p></li>
-<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>np.ndarray</em><em>]</em>) – Function to compute the drift term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the drift (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)).</p></li>
-<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em><em>, </em><em>np.ndarray</em><em>]</em>) – Function to compute the diffusion term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the diffusion (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>, <cite>n_dim</cite>)).</p></li>
-<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>np.ndarray</em><em>]</em>) – Function to generate the initial state given the number of samples.</p></li>
+<li><p><strong>drift</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to compute the drift term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the drift (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)).</p></li>
+<li><p><strong>diffusion</strong> (<em>Callable</em><em>[</em><em>[</em><em>torch.Tensor</em><em>, </em><em>float</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to compute the diffusion term. It takes the current state (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>)) and time as input and returns the diffusion (with shape (<cite>n_samples</cite>, <cite>n_dim</cite>, <cite>n_dim</cite>)).</p></li>
+<li><p><strong>initial_state</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>torch.Tensor</em><em>]</em>) – Function to generate the initial state given the number of samples.</p></li>
 <li><p><strong>initial_time</strong> (<em>float</em>) – The initial time of the SDE.</p></li>
 <li><p><strong>n_dim</strong> (<em>int</em>) – The dimension of the state space.</p></li>
+<li><p><strong>self</strong> (<em>Model</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -299,9 +295,9 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">drift</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="o">-</span><span class="n">X</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">diffusion</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">initial_state</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a Model instance</span>
@@ -312,34 +308,28 @@
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">diffusion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></em></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">diffusion</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em></dt>
 <dd><p>Returns the diffusion function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> (<em>Model</em>)</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The diffusion function.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The diffusion function.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[np.ndarray, float], np.ndarray]</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable[[torch.Tensor, float], torch.Tensor]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drift</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></em></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">drift</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></em></dt>
 <dd><p>Returns the drift function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> (<em>Model</em>)</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The drift function.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The drift function.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable[[np.ndarray, float], np.ndarray]</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Callable[[torch.Tensor, float], torch.Tensor]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -349,14 +339,11 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em></dt>
 <dd><p>Returns the initial time of the SDE.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> (<em>Model</em>)</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The initial time.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The initial time.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,14 +353,11 @@
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em></dt>
 <dd><p>Returns the dimension of the state space.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> (<em>Model</em>)</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The dimension of the state space.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The dimension of the state space.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
@@ -384,12 +368,12 @@
 <dd><p>Samples the initial state for a given number of samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></span></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></span></p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>self</strong> (<em>Model</em>)</p></li>
 <li><p><strong>n_samples</strong> (<em>int</em>) – Number of samples to generate.</p></li>
+<li><p><strong>self</strong> (<em>Model</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
@@ -397,7 +381,7 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>np.ndarray</dt><dd><p>Initial state with shape (n_samples, n_dim).</p>
+<dt>torch.Tensor</dt><dd><p>Initial state with shape (n_samples, n_dim).</p>
 </dd>
 </dl>
 </p>
@@ -421,10 +405,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="euler_maruyama/euler_maruyama.html">Euler-Maruyama Method Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="euler_maruyama/euler_maruyama.html#error-analysis">Error Analysis</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="torch/torch.html">Torch version of SDE Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="torch/torch.html#implementations">Implementations</a></li>
 </ul>
 </li>
 </ul>

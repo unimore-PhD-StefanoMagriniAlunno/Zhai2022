@@ -7,17 +7,17 @@ from zhai2022.sde.euler_maruyama import EulerMaruyama
 
 
 def test_sde():
-    import numpy as np
+    import torch
 
     # Define drift, diffusion, and initial state functions
     def drift(X, t):
         return -X
 
     def diffusion(X, t):
-        return np.tile(np.eye(X.shape[1]), (X.shape[0], 1, 1))
+        return torch.tile(torch.eye(X.shape[1]), (X.shape[0], 1, 1))
 
     def initial_state(n_samples):
-        return np.random.randn(n_samples, 2)
+        return torch.randn(n_samples, 2)
 
     # Create a Model instance
     model = Model(drift, diffusion, initial_state, initial_time=0.0, n_dim=2)
@@ -28,20 +28,20 @@ def test_sde():
 
 
 def test_euler_maruyama():
-    import numpy as np
+    import torch
 
     def drift(X, t):
         return -X
 
     def diffusion(X, t):
-        return np.tile(np.eye(X.shape[1]), (X.shape[0], 1, 1))
+        return torch.tile(torch.eye(X.shape[1]), (X.shape[0], 1, 1))
 
     def initial_state(n_samples):
-        return np.random.randn(n_samples, 2)
+        return torch.randn(n_samples, 2)
 
     model = Model(drift, diffusion, initial_state, initial_time=0.0, n_dim=2)
 
-    dt_schedule = np.ones(100) / np.arange(1, 101) * 0.1
+    dt_schedule = torch.ones(100) / torch.arange(1, 101) * 0.1
     euler_maruyama = EulerMaruyama(model, dt_schedule)
     assert euler_maruyama.n_steps == 100
 

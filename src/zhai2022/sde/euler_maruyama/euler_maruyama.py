@@ -1,5 +1,5 @@
 from zhai2022.sde.model import Model
-import numpy as np
+import torch
 
 
 class EulerMaruyama:
@@ -19,7 +19,7 @@ class EulerMaruyama:
     def __init__(
         self,
         model: Model,
-        dt_schedule: np.ndarray,
+        dt_schedule: torch.Tensor,
     ) -> None:
         """Initialize the Euler-Maruyama scheme with a given SDE model and time step schedule.
 
@@ -27,7 +27,7 @@ class EulerMaruyama:
         ----------
             model : Model
                 An instance of the SDE model defining the drift and diffusion terms.
-            dt_schedule : np.ndarray
+            dt_schedule : torch.Tensor
                 A 1D array of positive floats representing the time step sizes for each iteration.
 
         Raises
@@ -37,11 +37,11 @@ class EulerMaruyama:
         Examples
         --------
             >>> model = Model(...)
-            >>> dt_schedule = np.array([0.01, 0.01, 0.01])
+            >>> dt_schedule = torch.array([0.01, 0.01, 0.01])
             >>> euler_maruyama = EulerMaruyama(model, dt_schedule)
         """
 
-        if np.any(dt_schedule <= 0):
+        if torch.any(dt_schedule <= 0):
             raise ValueError("All elements in dt_schedule must be positive floats.")
         if dt_schedule.ndim != 1:
             raise ValueError("dt_schedule must be a 1D array.")
@@ -63,7 +63,7 @@ class EulerMaruyama:
     def get_trajectory(
         self: "EulerMaruyama",
         n_samples: int,
-    ) -> np.ndarray:
+    ) -> torch.Tensor:
         """Generate a trajectory using the Euler-Maruyama scheme.
 
         Parameters
@@ -78,7 +78,7 @@ class EulerMaruyama:
 
         Returns
         -------
-            np.ndarray
+            torch.Tensor
                 Trajectory of states. Shape: (n_steps + 1, n_samples, n_dim)
 
         Examples
@@ -86,16 +86,16 @@ class EulerMaruyama:
             >>> euler_maruyama = EulerMaruyama(model, dt_schedule)
             >>> trajectory = euler_maruyama.get_trajectory(n_samples=100)
         """
-        Xtraj = np.zeros(
-            (self.n_steps + 1, n_samples, self.model.n_dim), dtype=np.float64
+        Xtraj = torch.zeros(
+            (self.n_steps + 1, n_samples, self.model.n_dim), dtype=torch.float64
         )
         Xtraj[0] = self.model.sample_initial_state(n_samples)
         t_current = self.model.initial_time
         for k in range(1, self.n_steps + 1):
             dt = self.dt_schedule[k - 1]
-            dW = np.random.normal(
-                loc=0.0, scale=np.sqrt(dt), size=(n_samples, self.model.n_dim)
-            )
+            dW = torch.randn(
+                n_samples, self.model.n_dim, dtype=torch.float64
+            ) * torch.sqrt(dt)
             try:
                 drift_term = self.model.drift(Xtraj[k - 1], t_current)
                 diffusion_term = self.model.diffusion(Xtraj[k - 1], t_current)
@@ -113,7 +113,7 @@ class EulerMaruyama:
                 Xtraj[k] = (
                     Xtraj[k - 1]
                     + drift_term * dt
-                    + np.einsum("sij,sj->sj", diffusion_term, dW)
+                    + torch.einsum("sij,sj->sj", diffusion_term, dW)
                 )
                 t_current += dt
         return Xtraj
@@ -121,7 +121,7 @@ class EulerMaruyama:
     def get_end(
         self: "EulerMaruyama",
         n_samples: int,
-    ) -> np.ndarray:
+    ) -> torch.Tensor:
         """Generate samples at the final time using the Euler-Maruyama scheme.
 
         Parameters
@@ -136,7 +136,7 @@ class EulerMaruyama:
 
         Returns
         -------
-            np.ndarray
+            torch.Tensor
                 Updated state after applying all time steps in `dt_schedule`. Shape: (n_samples, n_dim)
 
         Examples
@@ -148,9 +148,9 @@ class EulerMaruyama:
         t_current = self.model.initial_time
         for k in range(self.n_steps):
             dt = self.dt_schedule[k]
-            dW = np.random.normal(
-                loc=0.0, scale=np.sqrt(dt), size=(n_samples, self.model.n_dim)
-            )
+            dW = torch.randn(
+                n_samples, self.model.n_dim, dtype=torch.float64
+            ) * torch.sqrt(dt)
             try:
                 drift_term = self.model.drift(X_current, t_current)
                 diffusion_term = self.model.diffusion(X_current, t_current)
@@ -168,7 +168,7 @@ class EulerMaruyama:
                 X_current = (
                     X_current
                     + drift_term * dt
-                    + np.einsum("sij,sj->sj", diffusion_term, dW)
+                    + torch.einsum("sij,sj->sj", diffusion_term, dW)
                 )
                 t_current += dt
         return X_current

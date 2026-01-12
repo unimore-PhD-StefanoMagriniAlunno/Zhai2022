@@ -1,4 +1,4 @@
-import numpy as np
+import torch
 from typing import Callable
 
 
@@ -13,9 +13,9 @@ class Model:
 
     def __init__(
         self: "Model",
-        drift: Callable[[np.ndarray, float], np.ndarray],
-        diffusion: Callable[[np.ndarray, float], np.ndarray],
-        initial_state: Callable[[int], np.ndarray],
+        drift: Callable[[torch.Tensor, float], torch.Tensor],
+        diffusion: Callable[[torch.Tensor, float], torch.Tensor],
+        initial_state: Callable[[int], torch.Tensor],
         initial_time: float,
         n_dim: int,
     ) -> None:
@@ -24,12 +24,11 @@ class Model:
 
         Parameters
         ----------
-            self : Model
-            drift : Callable[[np.ndarray, float], np.ndarray]
+            drift : Callable[[torch.Tensor, float], torch.Tensor]
                 Function to compute the drift term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the drift (with shape (`n_samples`, `n_dim`)).
-            diffusion : Callable[[np.ndarray, float], np.ndarray]
+            diffusion : Callable[[torch.Tensor, float], torch.Tensor]
                 Function to compute the diffusion term. It takes the current state (with shape (`n_samples`, `n_dim`)) and time as input and returns the diffusion (with shape (`n_samples`, `n_dim`, `n_dim`)).
-            initial_state : Callable[[int], np.ndarray]
+            initial_state : Callable[[int], torch.Tensor]
                 Function to generate the initial state given the number of samples.
             initial_time : float
                 The initial time of the SDE.
@@ -51,9 +50,9 @@ class Model:
         >>> def drift(X, t):
         >>>     return -X
         >>> def diffusion(X, t):
-        >>>     return np.tile(np.eye(X.shape[1]), (X.shape[0], 1, 1))
+        >>>     return torch.tile(torch.eye(X.shape[1]), (X.shape[0], 1, 1))
         >>> def initial_state(n_samples):
-        >>>     return np.random.randn(n_samples, 2)
+        >>>     return torch.randn(n_samples, 2)
 
         >>> # Create a Model instance
         >>> model = Model(drift, diffusion, initial_state, initial_time=0.0, n_dim=2)
@@ -68,13 +67,12 @@ class Model:
         self.__initial_time = initial_time
         self.__n_dim = n_dim
 
-    def sample_initial_state(self: "Model", n_samples: int) -> np.ndarray:
+    def sample_initial_state(self: "Model", n_samples: int) -> torch.Tensor:
         """
         Samples the initial state for a given number of samples.
 
         Parameters
         ----------
-            self : Model
             n_samples : int
                 Number of samples to generate.
 
@@ -84,7 +82,7 @@ class Model:
 
         Returns
         -------
-            np.ndarray
+            torch.Tensor
                 Initial state with shape (n_samples, n_dim).
 
         Examples
@@ -107,10 +105,6 @@ class Model:
         """
         Returns the dimension of the state space.
 
-        Parameters
-        ----------
-            self : Model
-
         Returns
         -------
             int
@@ -124,10 +118,6 @@ class Model:
         """
         Returns the initial time of the SDE.
 
-        Parameters
-        ----------
-            self : Model
-
         Returns
         -------
             float
@@ -137,34 +127,26 @@ class Model:
         return self.__initial_time
 
     @property
-    def drift(self: "Model") -> Callable[[np.ndarray, float], np.ndarray]:
+    def drift(self: "Model") -> Callable[[torch.Tensor, float], torch.Tensor]:
         """
         Returns the drift function.
 
-        Parameters
-        ----------
-            self : Model
-
         Returns
         -------
-            Callable[[np.ndarray, float], np.ndarray]
+            Callable[[torch.Tensor, float], torch.Tensor]
                 The drift function.
         """
 
         return self.__drift
 
     @property
-    def diffusion(self: "Model") -> Callable[[np.ndarray, float], np.ndarray]:
+    def diffusion(self: "Model") -> Callable[[torch.Tensor, float], torch.Tensor]:
         """
         Returns the diffusion function.
 
-        Parameters
-        ----------
-            self : Model
-
         Returns
         -------
-            Callable[[np.ndarray, float], np.ndarray]
+            Callable[[torch.Tensor, float], torch.Tensor]
                 The diffusion function.
         """
 

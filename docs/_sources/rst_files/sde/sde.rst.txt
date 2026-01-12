@@ -36,4 +36,3 @@ Implementations
     :caption: Contents:
 
     euler_maruyama/euler_maruyama
-    torch/torch
