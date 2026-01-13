@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:f6c46d79785ff053d6d54befc0349b2e1e2a5bf7d4b0792b6a2ff6fd13de74de"
+content_hash = "sha256:29b514d7bdb5ccdbdf09a4d8e21dabd214fa09a255526e940069e1e52983f725"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -4149,6 +4149,20 @@ files = [
     {file = "torch-2.7.1-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:30207f672328a42df4f2174b8f426f354b2baa0b7cca3a0adb3d6ab5daf00dc8"},
     {file = "torch-2.7.1-cp313-cp313t-win_amd64.whl", hash = "sha256:79042feca1c634aaf6603fe6feea8c6b30dfa140a6bbc0b973e2260c7e79a22e"},
     {file = "torch-2.7.1-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:988b0cbc4333618a1056d2ebad9eb10089637b659eb645434d0809d8d937b946"},
+]
+
+[[package]]
+name = "torchist"
+version = "1.0.1"
+requires_python = ">=3.8"
+summary = "NumPy-style histograms in PyTorch"
+groups = ["default"]
+dependencies = [
+    "torch>=1.6.0",
+]
+files = [
+    {file = "torchist-1.0.1-py3-none-any.whl", hash = "sha256:92eeca41c4dc5c3426eb61f3567e261935770bb6d06eb26a562e051083b7c480"},
+    {file = "torchist-1.0.1.tar.gz", hash = "sha256:8c5533ce07c3f35bcf23b2c03c2378bf132df2a59004cd529ffbf840137e12a5"},
 ]
 
 [[package]]

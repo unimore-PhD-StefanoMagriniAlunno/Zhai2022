@@ -74,7 +74,7 @@ class Gaussian:
                     return _d_U(r2), _d2_U(r2)
 
             usefull_1 = lambda d_U, d2_U, x: (
-                4 * d2_U * torch.as_tensor(torch.norm(x, dim=1) ** 2)
+                4 * d2_U * torch.as_tensor(torch.norm(x, dim=1) ** 2, device=x.device)
                 + 2 * d_U * x.shape[1],
                 2 * d_U[:, None] * x,
             )

@@ -68,7 +68,7 @@ class EulerMaruyama:
 
         Parameters
         ----------
-            n_samples : int
+            n_samples : int | None
                 Number of samples to generate.
 
         Raises
